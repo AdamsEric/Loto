@@ -5,7 +5,8 @@ interface InputProps {
   label?: string,
   name: string,
   defaultValue?: string|number,
-  onChange: Function
+  onChange: Function,
+  maxLength?: number
 }
 
 const StyledInput = styled(Form.Control)`
@@ -28,6 +29,7 @@ const Input = (props: InputProps) => {
             name={props.name}
             type='text'
             defaultValue={props.defaultValue || ''}
+            maxLength={props.maxLength}
             onChange={(event: any) => props.onChange(event.target.value)}
           />
         </Col>

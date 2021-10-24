@@ -8,6 +8,7 @@ const StyledBase = styled.div`
   justify-content: center;
   background-color: #058ce1;
   height: 100vh;
+  overflow-y: auto;
 `
 
 const App = () => {
