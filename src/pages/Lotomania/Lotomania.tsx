@@ -40,11 +40,16 @@ const Lotomania = () => {
             Concurso: {sorteio.concurso || 'Não definido'}
           </Col>
           <Col sm={12} className='mb-2' key={chaveSorteio}>
-            Números sorteados: {
-              !sorteio.concurso
-              ? 'Não definidos'
-              : sorteio.numeros.map((num: string) => (<NumberArea number={num}/>))
-            }
+            <div>Números sorteados:</div>
+            <div className='text-center'>
+              {
+                !sorteio.concurso
+                ? 'Não definidos'
+                : sorteio.numeros.map((num: string, index: number) => (
+                  <NumberArea key={`${index}-${num}`} number={num}/>)
+                )
+              }
+            </div>
           </Col>
         </Row>
       </CardArea>

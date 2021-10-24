@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { Modal, Form, Row, Col } from 'react-bootstrap';
-import { toNumber, isNaN } from 'lodash';
+import { useState, useEffect } from 'react'
+import { Modal, Form, Row, Col } from 'react-bootstrap'
+import { toNumber, isNaN, uniq } from 'lodash'
 
-import { Button, Input, InputNumber } from 'src/components/ui';
+import { Button, Input, InputNumber } from 'src/components/ui'
 
-import { ISorteio } from 'src/models';
+import { ISorteio } from 'src/models'
 
 interface IDefinirSorteioProps {
   sorteio: ISorteio;
 
-  aoConfirmar(sorteio: ISorteio): void;
+  aoConfirmar(sorteio: ISorteio): void
 }
 
 const DefinirSorteio = (props: IDefinirSorteioProps) => {
@@ -19,8 +19,8 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
       '', '', '', '', '', '', '', '', '', '',
       '', '', '', '', '', '', '', '', '', ''
     ]
-  });
-  const [exibir, setExibir] = useState<boolean>(false);
+  })
+  const [exibir, setExibir] = useState<boolean>(false)
 
   const confirmarDados = () => {
     if (isNaN(sorteio?.concurso) || ((sorteio?.concurso || 0) < 1000)) {
@@ -29,8 +29,12 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
     }
 
     if (sorteio.numeros.filter((num: string) => isNaN(num) || num.length === 0 || num.length > 3).length > 0) {
-      alert('Existe número inválido. Verifique.')
-      console.log(sorteio.numeros)
+      alert('Existe número inválido ou não informado. Verifique os números informados.')
+      return
+    }
+
+    if (uniq(sorteio.numeros).length < 20) {
+      alert('Existe número repetido. Verifique os números informados.')
       return
     }
 
@@ -38,27 +42,33 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
     setExibir(false)
   }
 
+  useEffect(() => {
+    if (exibir) {
+      setSorteio(props.sorteio)
+    }
+  }, [exibir, props.sorteio])
+
   const renderizarCampoNumero = (indice: number) => {
     return (
       <InputNumber
         name={`numero-${indice + 1}`}
         defaultValue={sorteio?.numeros[indice]}
         onChange={(valor: string) => {
-          let novoSorteio = sorteio;
-
+          let novoSorteio = sorteio
+          
           if (novoSorteio && valor) {
             let novoValor = toNumber(valor).toString()
             if (novoValor.length < 2) {
-              novoValor = `0${novoValor}`
+              valor = `0${novoValor}`
             }
-
-            novoSorteio.numeros[indice] = novoValor;
-            setSorteio(novoSorteio);
           }
+
+          novoSorteio.numeros[indice] = valor
+          setSorteio(novoSorteio)
         }}
       />
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -81,6 +91,7 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
                   label={'Concurso'}
                   name='concurso'
                   defaultValue={sorteio?.concurso}
+                  maxLength={4}
                   onChange={(value: string) =>
                     setSorteio({
                       ...sorteio,
@@ -97,44 +108,29 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
                   <h6>Números</h6>
                 </label>
               </Col>
+
+              {/* Linha 1 */}
               <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 1 }}>{renderizarCampoNumero(0)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(1)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(2)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(3)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(4)}</Col>
-
               <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 0 }}>{renderizarCampoNumero(5)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(6)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(7)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(8)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(9)}</Col>
 
+              {/* Linha 2 */}
               <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span:1, offset: 1 }}>{renderizarCampoNumero(10)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(11)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(12)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(13)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(14)}</Col>
-
               <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 0 }}>{renderizarCampoNumero(15)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(16)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(17)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(18)}</Col>
-
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(19)}</Col>
             </Row>
 
