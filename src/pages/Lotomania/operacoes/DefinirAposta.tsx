@@ -2,19 +2,21 @@ import { useState, useEffect } from 'react'
 import { Modal, Form, Row, Col } from 'react-bootstrap'
 import { toNumber, isNaN, uniq } from 'lodash'
 
-import { Button, Input, InputNumber } from 'src/components/ui'
+import { Button, InputNumber } from 'src/components/ui'
 
-import { ISorteio } from 'src/models'
+import { IAposta } from 'src/models'
 
-interface IDefinirSorteioProps {
-  sorteio: ISorteio,
-  aoConfirmar(sorteio: ISorteio): void
+interface IDefinirApostaProps {
+  aposta: IAposta,
+  aoConfirmar(Aposta: IAposta): void
 }
 
-const DefinirSorteio = (props: IDefinirSorteioProps) => {
-  const [sorteio, setSorteio] = useState<ISorteio>(props.sorteio || {
-    concurso: undefined,
+const DefinirAposta = (props: IDefinirApostaProps) => {
+  const [aposta, setAposta] = useState<IAposta>(props.aposta || {
     numeros: [
+      '', '', '', '', '', '', '', '', '', '',
+      '', '', '', '', '', '', '', '', '', '',
+      '', '', '', '', '', '', '', '', '', '',
       '', '', '', '', '', '', '', '', '', '',
       '', '', '', '', '', '', '', '', '', ''
     ]
@@ -22,48 +24,43 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
   const [exibir, setExibir] = useState<boolean>(false)
 
   const confirmarDados = () => {
-    if (isNaN(sorteio?.concurso) || ((sorteio?.concurso || 0) < 1000)) {
-      alert('O número do concurso informado é inválido')
-      return
-    }
-
-    if (sorteio.numeros.filter((num: string) => isNaN(num) || num.length === 0 || num.length > 3).length > 0) {
+    if (aposta.numeros.filter((num: string) => isNaN(num) || num.length === 0 || num.length > 3).length > 0) {
       alert('Existe número inválido ou não informado. Verifique os números informados.')
       return
     }
 
-    if (uniq(sorteio.numeros).length < 20) {
+    if (uniq(aposta.numeros).length < 50) {
       alert('Existe número repetido. Verifique os números informados.')
       return
     }
 
-    props.aoConfirmar(sorteio)
+    props.aoConfirmar(aposta)
     setExibir(false)
   }
 
   useEffect(() => {
     if (exibir) {
-      setSorteio(props.sorteio)
+      setAposta(props.aposta)
     }
-  }, [exibir, props.sorteio])
+  }, [exibir, props.aposta])
 
   const renderizarCampoNumero = (indice: number) => {
     return (
       <InputNumber
         name={`numero-${indice + 1}`}
-        defaultValue={sorteio?.numeros[indice]}
+        defaultValue={aposta?.numeros[indice]}
         onChange={(valor: string) => {
-          let novoSorteio = sorteio
+          let novaAposta = aposta
           
-          if (novoSorteio && valor) {
+          if (novaAposta && valor) {
             let novoValor = toNumber(valor).toString()
             if (novoValor.length < 2) {
               valor = `0${novoValor}`
             }
           }
 
-          novoSorteio.numeros[indice] = valor
-          setSorteio(novoSorteio)
+          aposta.numeros[indice] = valor
+          setAposta(novaAposta)
         }}
       />
     )
@@ -75,32 +72,15 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
         size={'sm'}
         variant={'primary'}
         onClick={() => setExibir(true)}>
-        Definir sorteio
+        Definir aposta
       </Button>
 
       <Modal show={exibir} size={'lg'} onHide={() => setExibir(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Definir sorteio</Modal.Title>
+          <Modal.Title>Definir aposta</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Row>
-              <Col sm={4} md={3}>
-                <Input
-                  label={'Concurso'}
-                  name='concurso'
-                  defaultValue={sorteio?.concurso}
-                  maxLength={4}
-                  onChange={(value: string) =>
-                    setSorteio({
-                      ...sorteio,
-                      concurso: toNumber(value),
-                    })
-                  }
-                />
-              </Col>
-            </Row>
-
             <Row>
               <Col sm={12}>
                 <label>
@@ -131,6 +111,42 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(17)}</Col>
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(18)}</Col>
               <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(19)}</Col>
+
+              {/* Linha 3 */}
+              <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span:1, offset: 1 }}>{renderizarCampoNumero(20)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(21)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(22)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(23)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(24)}</Col>
+              <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 0 }}>{renderizarCampoNumero(25)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(26)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(27)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(28)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(29)}</Col>
+
+              {/* Linha 4 */}
+              <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span:1, offset: 1 }}>{renderizarCampoNumero(30)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(31)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(32)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(33)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(34)}</Col>
+              <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 0 }}>{renderizarCampoNumero(35)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(36)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(37)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(38)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(39)}</Col>
+
+              {/* Linha 5 */}
+              <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span:1, offset: 1 }}>{renderizarCampoNumero(40)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(41)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(42)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(43)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(44)}</Col>
+              <Col sm={12} md={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 0 }}>{renderizarCampoNumero(45)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(46)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(47)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(48)}</Col>
+              <Col sm={12} md={2} lg={1}>{renderizarCampoNumero(49)}</Col>
             </Row>
 
             <Row>
@@ -150,4 +166,4 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
   )
 }
 
-export default DefinirSorteio;
+export default DefinirAposta
