@@ -63,6 +63,7 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
     return (
       <InputNumber
         id={`sorteio-numero-${indice + 1}`}
+        previousId={`sorteio-numero-${indice}`}
         name={`numero-${indice + 1}`}
         defaultValue={sorteio?.numeros[indice]}
         onChange={(valor: string) => {

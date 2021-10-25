@@ -62,6 +62,7 @@ const DefinirAposta = (props: IDefinirApostaProps) => {
     return (
       <InputNumber
         id={`aposta-numero-${indice + 1}`}
+        previousId={`aposta-numero-${indice}`}
         name={`numero-${indice + 1}`}
         defaultValue={aposta?.numeros[indice]}
         onChange={(valor: string) => {
