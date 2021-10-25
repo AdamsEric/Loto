@@ -4,7 +4,7 @@ import { CardArea, NumberArea } from 'src/components/ui'
 
 import { ISorteio, IAposta } from 'src/models'
 
-import { DefinirSorteio, DefinirAposta } from './operacoes'
+import { DefinirSorteio, DefinirAposta, Conferencia } from './operacoes'
 
 const Lotomania = () => {
   const [sorteio, setSorteio] = useState<ISorteio>({
@@ -107,7 +107,11 @@ const Lotomania = () => {
             <h5>Conferência</h5>
           </Col>
           <Col sm={12} className='mb-2'>
-            Números acertados:
+            <Conferencia
+              key={chaveSorteio + chaveAposta}
+              numerosSorteio={sorteio.numeros}
+              numerosAposta={aposta.numeros}
+            />
           </Col>
         </Row>
       </CardArea>

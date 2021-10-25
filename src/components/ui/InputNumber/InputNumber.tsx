@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { isNaN } from 'lodash'
 
 interface InputNumberProps {
+  id?: string,
   label?: string,
   name: string,
   defaultValue?: string|number,
@@ -14,9 +15,36 @@ const StyledInputNumber = styled(Form.Control)`
   text-align: center;
 `
 
+const numberKeyCodes = [
+  48, 96,   // 0
+  49, 97,   // 1
+  50, 98,   // 2
+  51, 99,   // 3
+  52, 100,  // 4
+  53, 101,  // 5
+  54, 102,  // 6
+  55, 103,  // 7
+  56, 104,  // 8
+  57, 105   // 9
+]
+
+const actionKeyCodes = [
+  8,  // Backspace
+  9,  // Tab
+  16, // Shift
+  37, // ArrowLeft
+  38, // ArrowUp
+  39, // ArrowRight
+  40, // ArrowDown
+  46, // Delete
+]
+
 const InputNumber = (props: InputNumberProps) => {
   const onKeyDown = (event: any) => {
-    if (isNaN(event.keyCode) || [69, ].includes(event.keyCode)) {
+    if (isNaN(event.keyCode) || ![
+      ...numberKeyCodes,
+      ...actionKeyCodes
+    ].includes(event.keyCode)) {
       event.preventDefault()
     }
 
@@ -36,6 +64,7 @@ const InputNumber = (props: InputNumberProps) => {
 
         <Col sm={12}>
           <StyledInputNumber
+            id={props.id}
             name={props.name}
             type='text'
             maxLength="2"

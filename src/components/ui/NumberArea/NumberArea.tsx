@@ -1,6 +1,11 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-const StyledNumberArea = styled.span`
+interface INumberArea {
+  number: string,
+  invalid?: boolean
+}
+
+const StyledNumberArea = styled.span <INumberArea> `
   margin: 0 8px 0 0;
   letter-spacing: 2px;
   padding: 8px;
@@ -11,18 +16,23 @@ const StyledNumberArea = styled.span`
   color: #ffffff;
   font-weight: bold;
   border-radius: 50%;
-`
 
-interface INumberArea {
-  number: string
-}
+  ${props => props.invalid && css`
+    background-color: #a2a2a2;
+    border: 1px solid #a2a2a2;
+  `}
+`
 
 const NumberArea = (props: INumberArea) => {
   return (
-    <StyledNumberArea>
+    <StyledNumberArea {...props}>
       {props.number}
     </StyledNumberArea>
   )
+}
+
+NumberArea.defaultProps = {
+  invalid: false
 }
 
 export default NumberArea
