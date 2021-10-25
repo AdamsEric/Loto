@@ -4,6 +4,7 @@ import { isNaN } from 'lodash'
 
 interface InputNumberProps {
   id?: string,
+  previousId?: string,
   label?: string,
   name: string,
   defaultValue?: string|number,
@@ -46,6 +47,14 @@ const InputNumber = (props: InputNumberProps) => {
       ...actionKeyCodes
     ].includes(event.keyCode)) {
       event.preventDefault()
+    }
+
+    if (!event.target.value && event.keyCode === 8 && props.previousId) {
+      const campo = document.getElementById(props.previousId)
+
+      if (campo) {
+        campo.focus()
+      }
     }
 
     return true
