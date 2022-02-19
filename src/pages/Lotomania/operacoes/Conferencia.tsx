@@ -1,4 +1,4 @@
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Alert } from 'react-bootstrap'
 import { NumberArea } from 'src/components/ui'
 import { intersection } from 'lodash'
 
@@ -24,7 +24,9 @@ const Conferencia = (props: IConferenciaProps) => {
   return (
     <Row className='text-center'>
       { !numerosValidos() ? (
-        <div>Informe os números para conferência</div>
+        <Alert className={'my-2 py-2'} variant={'primary'}>
+          Após definir os números do sorteio e da aposta, os resultados serão apresentados.
+        </Alert>
       ) : (
         <>
           <Col sm={12} lg={6}>

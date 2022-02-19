@@ -53,7 +53,7 @@ const Lotomania = () => {
               {
                 sorteio.numeros.filter((a: string) => a === '').length > 0
                 ? (
-                  <Alert className={'my-2 py-2'}  variant={'primary'}>
+                  <Alert className={'my-2 py-2'} variant={'primary'}>
                     Utilize o botão "Definir sorteio" para preencher os números sorteados
                   </Alert>
                 )
