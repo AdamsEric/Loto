@@ -39,7 +39,8 @@ const Inicio = () => {
       </Card.Body>
       <Card.Footer>
         <StyledFooter>
-          Desenvolvido por Eric Adams. Código aberto e disponível no <a href='https://github.com/AdamsEric/Loto' target='_blank'>Github</a>.
+          Desenvolvido por Eric Adams. Código aberto e disponível
+          no <a href='https://github.com/AdamsEric/Loto' target='_blank' rel="noreferrer">Github</a>.
         </StyledFooter>
       </Card.Footer>
     </StyledBase>
