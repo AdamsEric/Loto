@@ -60,7 +60,9 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
 
   useEffect(() => {
     if (exibir) {
-      setSorteio(props.sorteio)
+      if (props.sorteio.concurso) {
+        setSorteio(props.sorteio)
+      }
     }
   }, [exibir, props.sorteio])
 
@@ -128,7 +130,7 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
           <Form key={keyFormulario}>
             <BlockUi tag='div' blocking={consultandoConcurso}>
               <Row>
-                <Col sm={4} md={3}>
+                <Col xs={4} sm={4} md={3}>
                   <Input
                     label={'Concurso'}
                     name='concurso'
@@ -142,7 +144,7 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
                     }
                   />
                 </Col>
-                <Col className='d-flex mb-2 align-items-end' sm={8} md={9}>
+                <Col xs={8} sm={8} md={9} className='d-flex mb-2 align-items-end' >
                   <Button
                     disabled={!sorteio.concurso}
                     onClick={() => consultarConcurso()}>
@@ -161,39 +163,39 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
 
               {/* Linha 1 */}
               <Row>
-                <Col sm={12} md={2}>{renderizarCampoNumero(0)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(1)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(2)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(3)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(4)}</Col>
+                <Col xs={{ span: 2, offset: 1 }}>{renderizarCampoNumero(0)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(1)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(2)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(3)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(4)}</Col>
               </Row>
 
               {/* Linha 2 */}
               <Row>
-                <Col sm={12} md={2}>{renderizarCampoNumero(5)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(6)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(7)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(8)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(9)}</Col>
+                <Col xs={{ span: 2, offset: 1 }}>{renderizarCampoNumero(5)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(6)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(7)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(8)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(9)}</Col>
               </Row>
 
               {/* Linha 3 */}
               <Row>
                 
-                <Col sm={12} md={2}>{renderizarCampoNumero(10)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(11)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(12)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(13)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(14)}</Col>
+                <Col xs={{ span: 2, offset: 1 }}>{renderizarCampoNumero(10)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(11)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(12)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(13)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(14)}</Col>
               </Row>
 
               {/* Linha 4 */}
               <Row>
-                <Col sm={12} md={2}>{renderizarCampoNumero(15)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(16)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(17)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(18)}</Col>
-                <Col sm={12} md={2}>{renderizarCampoNumero(19)}</Col>
+                <Col xs={{ span: 2, offset: 1 }}>{renderizarCampoNumero(15)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(16)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(17)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(18)}</Col>
+                <Col xs={2}>{renderizarCampoNumero(19)}</Col>
               </Row>
 
               <Row className='mt-1'>

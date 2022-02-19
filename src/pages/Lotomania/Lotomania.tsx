@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Alert } from 'react-bootstrap'
 import { CardArea, NumberArea } from 'src/components/ui'
 
 import { ISorteio, IAposta } from 'src/models'
@@ -52,7 +52,11 @@ const Lotomania = () => {
             <div className='text-center'>
               {
                 sorteio.numeros.filter((a: string) => a === '').length > 0
-                ? 'Não definidos'
+                ? (
+                  <Alert className={'my-2 py-2'}  variant={'primary'}>
+                    Utilize o botão "Definir sorteio" para preencher os números sorteados
+                  </Alert>
+                )
                 : sorteio.numeros.map((num: string, index: number) => {
                   return (
                     <>
@@ -86,7 +90,11 @@ const Lotomania = () => {
             <div className='text-center'>
               {
                 aposta.numeros.filter((a: string) => a === '').length > 0
-                ? 'Não definidos'
+                ? (
+                  <Alert className={'my-2 py-2'} variant={'primary'}>
+                    Utilize o botão "Definir aposta" para preencher os números apostados
+                  </Alert>
+                )
                 : aposta.numeros.map((num: string, index: number) => {
                   return (
                     <>

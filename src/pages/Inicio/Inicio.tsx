@@ -17,6 +17,13 @@ const StyledTitle = styled.h4`
   margin-bottom: 20px;
 `
 
+const StyledFooter = styled.div`
+  font-size: 14px;
+  text-align: center;
+  text-align: center;
+  text-decoration: none;
+`
+
 const Inicio = () => {
   return (
     <StyledBase>
@@ -30,6 +37,11 @@ const Inicio = () => {
           </Tab>
         </Tabs>
       </Card.Body>
+      <Card.Footer>
+        <StyledFooter>
+          Desenvolvido por Eric Adams. Código aberto e disponível no <a href='https://github.com/AdamsEric/Loto' target='_blank'>Github</a>.
+        </StyledFooter>
+      </Card.Footer>
     </StyledBase>
   )
 }
