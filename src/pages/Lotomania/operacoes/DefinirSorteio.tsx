@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Modal, Form, Row, Col } from 'react-bootstrap'
 import { toNumber, isNaN, uniq } from 'lodash'
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css';
 
 import { Button, Input, InputNumber } from 'src/components/ui'
 
 import { ISorteio } from 'src/models'
+
+import apiConcurso from 'src/services/apiConcurso'
 
 interface IDefinirSorteioProps {
   sorteio: ISorteio,
@@ -21,6 +25,7 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
   })
   const [exibir, setExibir] = useState<boolean>(false)
   const [keyFormulario, setKeyFormulario] = useState(1000)
+  const [consultandoConcurso, setConsultandoConcurso] = useState<boolean>(false)
 
   const limparNumeros = () => {
     setSorteio({
@@ -58,6 +63,20 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
       setSorteio(props.sorteio)
     }
   }, [exibir, props.sorteio])
+
+  const consultarConcurso = async () => {
+    try {
+      setConsultandoConcurso(true)
+      const { data } = await apiConcurso.get(`lotomania/${sorteio.concurso}`)
+      setSorteio({
+        concurso: data.concurso,
+        numeros: data.dezenas
+      })
+    } catch (err: any) { }
+    finally {
+      setConsultandoConcurso(false)
+    }
+  }
 
   const renderizarCampoNumero = (indice: number) => {
     return (
@@ -107,84 +126,93 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
         </Modal.Header>
         <Modal.Body>
           <Form key={keyFormulario}>
-            <Row>
-              <Col sm={4} md={3}>
-                <Input
-                  label={'Concurso'}
-                  name='concurso'
-                  defaultValue={sorteio?.concurso}
-                  maxLength={4}
-                  onChange={(value: string) =>
-                    setSorteio({
-                      ...sorteio,
-                      concurso: toNumber(value),
-                    })
-                  }
-                />
-              </Col>
-            </Row>
+            <BlockUi tag='div' blocking={consultandoConcurso}>
+              <Row>
+                <Col sm={4} md={3}>
+                  <Input
+                    label={'Concurso'}
+                    name='concurso'
+                    defaultValue={sorteio?.concurso}
+                    maxLength={4}
+                    onChange={(value: string) =>
+                      setSorteio({
+                        ...sorteio,
+                        concurso: toNumber(value),
+                      })
+                    }
+                  />
+                </Col>
+                <Col className='d-flex mb-2 align-items-end' sm={8} md={9}>
+                  <Button
+                    disabled={!sorteio.concurso}
+                    onClick={() => consultarConcurso()}>
+                    Consultar concurso
+                  </Button>
+                </Col>
+              </Row>
 
-            <Row>
-              <Col sm={12}>
-                <label>
-                  <h6>Números</h6>
-                </label>
-              </Col>
-            </Row>
+              <Row>
+                <Col sm={12}>
+                  <label>
+                    <h6>Números</h6>
+                  </label>
+                </Col>
+              </Row>
 
-            {/* Linha 1 */}
-            <Row>
-              <Col sm={12} md={2}>{renderizarCampoNumero(0)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(1)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(2)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(3)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(4)}</Col>
-            </Row>
+              {/* Linha 1 */}
+              <Row>
+                <Col sm={12} md={2}>{renderizarCampoNumero(0)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(1)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(2)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(3)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(4)}</Col>
+              </Row>
 
-            {/* Linha 2 */}
-            <Row>
-              <Col sm={12} md={2}>{renderizarCampoNumero(5)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(6)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(7)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(8)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(9)}</Col>
-            </Row>
+              {/* Linha 2 */}
+              <Row>
+                <Col sm={12} md={2}>{renderizarCampoNumero(5)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(6)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(7)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(8)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(9)}</Col>
+              </Row>
 
-            {/* Linha 3 */}
-            <Row>
-              
-              <Col sm={12} md={2}>{renderizarCampoNumero(10)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(11)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(12)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(13)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(14)}</Col>
-            </Row>
+              {/* Linha 3 */}
+              <Row>
+                
+                <Col sm={12} md={2}>{renderizarCampoNumero(10)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(11)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(12)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(13)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(14)}</Col>
+              </Row>
 
-            {/* Linha 4 */}
-            <Row>
-              <Col sm={12} md={2}>{renderizarCampoNumero(15)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(16)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(17)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(18)}</Col>
-              <Col sm={12} md={2}>{renderizarCampoNumero(19)}</Col>
-            </Row>
+              {/* Linha 4 */}
+              <Row>
+                <Col sm={12} md={2}>{renderizarCampoNumero(15)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(16)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(17)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(18)}</Col>
+                <Col sm={12} md={2}>{renderizarCampoNumero(19)}</Col>
+              </Row>
 
-            <Row className='mt-1'>
-              <Col sm={12} className='d-flex justify-content-between'>
-                <Button
-                  variant={'secondary'}
-                  onClick={() => limparNumeros()}
-                >
-                  Limpar números
-                </Button>
-                <Button
-                  variant={'primary'}
-                  onClick={() => confirmarDados()}
-                >
-                  Confirmar
-                </Button>
-              </Col>
-            </Row>
+              <Row className='mt-1'>
+                <Col sm={12} className='d-flex justify-content-between'>
+                  <Button
+                    variant={'secondary'}
+                    onClick={() => limparNumeros()}
+                  >
+                    Limpar números
+                  </Button>
+                  <Button
+                    variant={'primary'}
+                    onClick={() => confirmarDados()}
+                  >
+                    Confirmar
+                  </Button>
+                </Col>
+              </Row>
+            </BlockUi>
           </Form>
         </Modal.Body>
       </Modal>
