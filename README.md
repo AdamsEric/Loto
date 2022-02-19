@@ -14,3 +14,7 @@ Na raiz do diretório, execute:
 
 Isso irá executar o projeto em modo de desenvolvimento.\
 Abra [http://localhost:3000](http://localhost:3000) para visualizar no browser.
+
+# Agradecimentos:
+
+A API utilizada para consulta aos resultados dos concursos desde projeto foi desenvolvida pelo [guto-alves](https://github.com/guto-alves), e está disponível neste [link](https://github.com/guto-alves/loterias-api). Grato ao autor pela disponibilização da ferramenta de forma gratuita.
