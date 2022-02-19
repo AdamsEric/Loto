@@ -6,7 +6,6 @@ interface INumberArea {
 }
 
 const StyledNumberArea = styled.span <INumberArea> `
-  margin: 0 8px 0 0;
   letter-spacing: 2px;
   padding: 4px;
   line-height: 44px;

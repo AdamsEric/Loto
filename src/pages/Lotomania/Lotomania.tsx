@@ -50,22 +50,30 @@ const Lotomania = () => {
           <Col sm={12} className='mb-2' key={chaveSorteio}>
             <div>Números sorteados:</div>
             <div className='text-center'>
-              {
-                sorteio.numeros.filter((a: string) => a === '').length > 0
-                ? (
-                  <Alert className={'my-2 py-2'} variant={'primary'}>
-                    Utilize o botão "Definir sorteio" para preencher os números sorteados
-                  </Alert>
-                )
-                : sorteio.numeros.map((num: string, index: number) => {
-                  return (
-                    <>
-                      <NumberArea key={`${index}-${num}`} number={num}/>
-                      { index % 10 === 9 ? <br /> : null }
-                    </>
+              <Row>
+                { sorteio.numeros.filter((a: string) => a === '').length > 0 && (
+                    <Col>
+                      <Alert className={'my-2 py-2'} variant={'primary'}>
+                        Utilize o botão "Definir sorteio" para preencher os números sorteados
+                      </Alert>
+                    </Col>
                   )
-                })
-              }
+                }
+                { sorteio.numeros.filter((a: string) => a === '').length === 0 && (
+                  <Col xs={12} md={{ span: 6, offset: 3 }} className='text-center'>
+                    <Row>
+                      {sorteio.numeros.map((num: string, index: number) => {
+                        return (
+                          <Col xs={2} md={1} className='mx-0 px-0'>
+                            <NumberArea key={`${index}-${num}`} number={num}/>
+                            {/* { index % 5 === 4 ? <br /> : null } */}
+                          </Col>
+                        )
+                      })}
+                    </Row>
+                  </Col>
+                )}
+              </Row>
             </div>
           </Col>
         </Row>
@@ -88,22 +96,29 @@ const Lotomania = () => {
           <Col sm={12} className='mb-2' key={chaveAposta}>
             <div>Números apostados:</div>
             <div className='text-center'>
-              {
-                aposta.numeros.filter((a: string) => a === '').length > 0
-                ? (
-                  <Alert className={'my-2 py-2'} variant={'primary'}>
-                    Utilize o botão "Definir aposta" para preencher os números apostados
-                  </Alert>
-                )
-                : aposta.numeros.map((num: string, index: number) => {
-                  return (
-                    <>
-                      <NumberArea key={`${index}-${num}`} number={num}/>
-                      { index % 10 === 9 ? <br /> : null }
-                    </>
+              <Row>
+                { aposta.numeros.filter((a: string) => a === '').length > 0 && (
+                    <Col>
+                      <Alert className={'my-2 py-2'} variant={'primary'}>
+                        Utilize o botão "Definir aposta" para preencher os números apostados
+                      </Alert>
+                    </Col>
                   )
-                })
-              }
+                }
+                { aposta.numeros.filter((a: string) => a === '').length === 0 && (
+                  <Col xs={12} md={{ span: 6, offset: 3 }} className='text-center'>
+                    <Row>
+                      {aposta.numeros.map((num: string, index: number) => {
+                        return (
+                          <Col xs={2} md={1} className='mx-0 px-0'>
+                            <NumberArea key={`${index}-${num}`} number={num}/>
+                          </Col>
+                        )
+                      })}
+                    </Row>
+                  </Col>
+                )}
+              </Row>
             </div>
           </Col>
         </Row>

@@ -31,14 +31,16 @@ const Conferencia = (props: IConferenciaProps) => {
         <>
           <Col sm={12} lg={6}>
             <div className='mb-3'>Números</div>
-            { props.numerosAposta.map((num: string, index: number) => {
-                return (
-                  <>
-                    <NumberArea invalid={!acerto(num)} key={`${index}-${num}`} number={num}/>
-                    { index % 10 === 9 ? <br /> : null }
-                  </>
-                )})
-            }
+            <Row>
+              { props.numerosAposta.map((num: string, index: number) => {
+                  return (
+                    <Col xs={2} md={1} className='mx-0 px-0'>
+                      <NumberArea invalid={!acerto(num)} key={`${index}-${num}`} number={num}/>
+                      {/* { index % 5 === 4 ? <br /> : null } */}
+                    </Col>
+                  )})
+              }
+            </Row>
           </Col>
           <Col>
             <div className='mb-3'>Quantidade de acertos</div>

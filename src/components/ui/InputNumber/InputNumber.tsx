@@ -71,11 +71,11 @@ const InputNumber = (props: InputNumberProps) => {
           </Col>
         )}
 
-        <Col sm={12}>
+        <Col sm={12} className='px-1'>
           <StyledInputNumber
             id={props.id}
             name={props.name}
-            type='text'
+            type='number'
             maxLength="2"
             defaultValue={props.defaultValue || ''}
             onKeyDown={(event: any) => onKeyDown(event)}
