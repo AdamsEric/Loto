@@ -19,6 +19,7 @@ const Button = (props: any) => {
   <StyledButton
     variant={props.variant || 'primary'}
     size={props.size || 'md'}
+    disabled={props.disabled}
     onClick={props.onClick}>
     {props.children}
   </StyledButton>
