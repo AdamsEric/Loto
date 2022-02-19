@@ -6,6 +6,8 @@ Aplicação para auxílio na conferência de aposta nas loterias da Caixa
 
 Este projeto foi criado com [Create React App](https://github.com/facebook/create-react-app).
 
+Disponível no Github Pages, neste [link](https://adamseric.github.io/Loto/)
+
 ## Iniciando o projeto
 
 Na raiz do diretório, execute:
