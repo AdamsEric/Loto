@@ -8,7 +8,7 @@ import { Button, Input, InputNumber } from 'src/components/ui'
 
 import { ISorteio } from 'src/models'
 
-import apiConcurso from 'src/services/apiConcurso'
+import { consultarConcursoLotomania } from 'src/services/apiConcurso'
 
 interface IDefinirSorteioProps {
   sorteio: ISorteio,
@@ -67,12 +67,16 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
   }, [exibir, props.sorteio])
 
   const consultarConcurso = async () => {
+    if (!sorteio.concurso) {
+      return
+    }
+
     try {
       setConsultandoConcurso(true)
-      const { data } = await apiConcurso.get(`lotomania/${sorteio.concurso}`)
+      const resultado = await consultarConcursoLotomania(sorteio.concurso)
       setSorteio({
-        concurso: data.concurso,
-        numeros: data.dezenas
+        concurso: resultado.numero,
+        numeros: resultado.listaDezenas
       })
     } catch (err: any) { }
     finally {

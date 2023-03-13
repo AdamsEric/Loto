@@ -1,7 +1,18 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
+import { ILotomaniaConcurso } from './types'
 
-const apiConcurso = axios.create({
-  baseURL: 'https://loteriascaixa-api.herokuapp.com/api/'
+const BASEURL = 'https://servicebus2.caixa.gov.br/portaldeloterias/api'
+
+const lotomaniaAPI =  axios.create({
+  baseURL: `${BASEURL}/lotomania/`
 })
 
-export default apiConcurso
+const consultarConcursoLotomania = async (concursoId: number): Promise<ILotomaniaConcurso> => {
+  const response: AxiosResponse<ILotomaniaConcurso> = await lotomaniaAPI.get(`${concursoId}`)
+
+  return response.data
+}
+
+export {
+  consultarConcursoLotomania
+}
