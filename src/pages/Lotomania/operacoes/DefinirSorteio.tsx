@@ -81,6 +81,7 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
     } catch (err: any) { }
     finally {
       setConsultandoConcurso(false)
+      setKeyFormulario(keyFormulario + 1)
     }
   }
 
