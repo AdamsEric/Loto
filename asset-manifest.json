@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.js": "/Loto/static/js/main.32954934.chunk.js",
-    "main.js.map": "/Loto/static/js/main.32954934.chunk.js.map",
+    "main.js": "/Loto/static/js/main.9031dd48.chunk.js",
+    "main.js.map": "/Loto/static/js/main.9031dd48.chunk.js.map",
     "runtime-main.js": "/Loto/static/js/runtime-main.c7383fb8.js",
     "runtime-main.js.map": "/Loto/static/js/runtime-main.c7383fb8.js.map",
     "static/css/2.8771d78b.chunk.css": "/Loto/static/css/2.8771d78b.chunk.css",
-    "static/js/2.8d2ec217.chunk.js": "/Loto/static/js/2.8d2ec217.chunk.js",
-    "static/js/2.8d2ec217.chunk.js.map": "/Loto/static/js/2.8d2ec217.chunk.js.map",
+    "static/js/2.f9825900.chunk.js": "/Loto/static/js/2.f9825900.chunk.js",
+    "static/js/2.f9825900.chunk.js.map": "/Loto/static/js/2.f9825900.chunk.js.map",
     "index.html": "/Loto/index.html",
     "static/css/2.8771d78b.chunk.css.map": "/Loto/static/css/2.8771d78b.chunk.css.map",
-    "static/js/2.8d2ec217.chunk.js.LICENSE.txt": "/Loto/static/js/2.8d2ec217.chunk.js.LICENSE.txt"
+    "static/js/2.f9825900.chunk.js.LICENSE.txt": "/Loto/static/js/2.f9825900.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c7383fb8.js",
     "static/css/2.8771d78b.chunk.css",
-    "static/js/2.8d2ec217.chunk.js",
-    "static/js/main.32954934.chunk.js"
+    "static/js/2.f9825900.chunk.js",
+    "static/js/main.9031dd48.chunk.js"
   ]
 }
