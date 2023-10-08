@@ -1,6 +1,8 @@
 # Loto
 
-Aplicação para auxílio na conferência de aposta nas loterias da Caixa
+Aplicação para auxílio na conferência de aposta nas loterias da Caixa.
+
+_Este projeto possui código aberto. Sinta-se à vontade para propor melhorias._
 
 # Sobre o projeto
 
@@ -8,15 +10,17 @@ Este projeto foi criado com [Create React App](https://github.com/facebook/creat
 
 Disponível no Github Pages, neste [link](https://adamseric.github.io/Loto/)
 
+_Obs: Atualmente, está disponível apenas a conferência de apostas da Lotomania. Novos tipos de aposta serão implementados no futuro._
+
 ## Iniciando o projeto
 
-Na raiz do diretório, execute:
+Na raiz do diretório, instale as dependências necessárias:
+
+### `npm install`
+
+E em seguida, execute o projeto:
 
 ### `npm start`
 
 Isso irá executar o projeto em modo de desenvolvimento.\
 Abra [http://localhost:3000](http://localhost:3000) para visualizar no browser.
-
-# Agradecimentos:
-
-A API utilizada para consulta aos resultados dos concursos desde projeto foi desenvolvida pelo [guto-alves](https://github.com/guto-alves), e está disponível neste [link](https://github.com/guto-alves/loterias-api). Grato ao autor pela disponibilização da ferramenta de forma gratuita.
