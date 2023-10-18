@@ -77,6 +77,13 @@ const InputNumber = (props: InputNumberProps) => {
             name={props.name}
             type='number'
             maxLength="2"
+            min={0}
+            max={99}
+            onInput={(event: any) => {
+              if (event.target.value > 99) {
+                event.target.value = event.target.value.slice(0, 2)
+              }
+            }}
             defaultValue={props.defaultValue || ''}
             onKeyDown={(event: any) => onKeyDown(event)}
             onChange={(event: any) => props.onChange(event.target.value)}
