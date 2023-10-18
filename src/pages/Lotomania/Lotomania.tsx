@@ -54,7 +54,7 @@ const Lotomania = () => {
                 { sorteio.numeros.filter((a: string) => a === '').length > 0 && (
                     <Col>
                       <Alert className={'my-2 py-2'} variant={'primary'}>
-                        Utilize o botão "Definir sorteio" para preencher os números sorteados
+                        Utilize o botão "Definir sorteio" para preencher os números sorteados.
                       </Alert>
                     </Col>
                   )
@@ -100,7 +100,7 @@ const Lotomania = () => {
                 { aposta.numeros.filter((a: string) => a === '').length > 0 && (
                     <Col>
                       <Alert className={'my-2 py-2'} variant={'primary'}>
-                        Utilize o botão "Definir aposta" para preencher os números apostados
+                        Utilize o botão "Definir aposta" para preencher os números apostados.
                       </Alert>
                     </Col>
                   )

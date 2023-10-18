@@ -24,9 +24,11 @@ const Conferencia = (props: IConferenciaProps) => {
   return (
     <Row className='text-center'>
       { !numerosValidos() ? (
-        <Alert className={'my-2 py-2'} variant={'primary'}>
-          Após definir os números do sorteio e da aposta, os resultados serão apresentados.
-        </Alert>
+        <Col sm={12}>
+          <Alert className={'my-2 py-2'} variant={'primary'}>
+            Após definir os números do sorteio e da aposta, os resultados serão apresentados.
+          </Alert>
+        </Col>
       ) : (
         <>
           <Col sm={12} lg={6}>
