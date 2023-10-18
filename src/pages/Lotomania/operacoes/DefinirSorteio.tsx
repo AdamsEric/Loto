@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Modal, Form, Row, Col } from 'react-bootstrap'
+import { Modal, Form, Row, Col, Alert } from 'react-bootstrap'
 import { toNumber, isNaN, uniq } from 'lodash'
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
@@ -26,6 +26,7 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
   const [exibir, setExibir] = useState<boolean>(false)
   const [keyFormulario, setKeyFormulario] = useState(1000)
   const [consultandoConcurso, setConsultandoConcurso] = useState<boolean>(false)
+  const [concursoInvalido, setConcursoInvalido] = useState<boolean>(false)
 
   const limparNumeros = () => {
     setSorteio({
@@ -66,19 +67,30 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
     }
   }, [exibir, props.sorteio])
 
+  useEffect(() => {
+    setConcursoInvalido(false)
+  }, [exibir, sorteio.concurso])
+
   const consultarConcurso = async () => {
     if (!sorteio.concurso) {
       return
     }
 
     try {
+      setConcursoInvalido(false)
       setConsultandoConcurso(true)
       const resultado = await consultarConcursoLotomania(sorteio.concurso)
       setSorteio({
         concurso: resultado.numero,
         numeros: resultado.listaDezenas
       })
-    } catch (err: any) { }
+    } catch (err: any) {
+      setConcursoInvalido(true)
+      setSorteio({
+        concurso: sorteio.concurso,
+        numeros: []
+      })
+    }
     finally {
       setConsultandoConcurso(false)
       setKeyFormulario(keyFormulario + 1)
@@ -157,6 +169,16 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
                   </Button>
                 </Col>
               </Row>
+
+              {concursoInvalido && (
+                <Row>
+                  <Col sm={12}>
+                    <Alert className='my-2 py-2' variant='danger'>
+                      O concurso digitado não foi encontrado.
+                    </Alert>
+                  </Col>
+                </Row>
+              )}
 
               <Row>
                 <Col sm={12}>
