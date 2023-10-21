@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Modal, Form, Row, Col, Alert } from 'react-bootstrap'
-import { toNumber, isNaN, uniq } from 'lodash'
+import { toNumber, isNaN, uniq, chunk } from 'lodash'
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 
@@ -27,6 +27,8 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
   const [keyFormulario, setKeyFormulario] = useState(1000)
   const [consultandoConcurso, setConsultandoConcurso] = useState<boolean>(false)
   const [concursoInvalido, setConcursoInvalido] = useState<boolean>(false)
+
+  const matrizIndices = chunk(Array.from({ length: 20 }, (_, index) => index), 5)
 
   const limparNumeros = () => {
     setSorteio({
@@ -188,42 +190,18 @@ const DefinirSorteio = (props: IDefinirSorteioProps) => {
                 </Col>
               </Row>
 
-              {/* Linha 1 */}
-              <Row>
-                <Col xs={{ span: 2, offset: 1 }}>{renderizarCampoNumero(0)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(1)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(2)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(3)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(4)}</Col>
-              </Row>
-
-              {/* Linha 2 */}
-              <Row>
-                <Col xs={{ span: 2, offset: 1 }}>{renderizarCampoNumero(5)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(6)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(7)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(8)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(9)}</Col>
-              </Row>
-
-              {/* Linha 3 */}
-              <Row>
-                
-                <Col xs={{ span: 2, offset: 1 }}>{renderizarCampoNumero(10)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(11)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(12)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(13)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(14)}</Col>
-              </Row>
-
-              {/* Linha 4 */}
-              <Row>
-                <Col xs={{ span: 2, offset: 1 }}>{renderizarCampoNumero(15)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(16)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(17)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(18)}</Col>
-                <Col xs={2}>{renderizarCampoNumero(19)}</Col>
-              </Row>
+              {matrizIndices.map((indices, indexList) => (
+                <Row key={indexList}>
+                  {indices.map(indice => (
+                    <Col
+                      key={indice} 
+                      xs={indice % 5 !== 0 ? 2 : { span: 2, offset: 1 }}
+                    >
+                      {renderizarCampoNumero(indice)}
+                    </Col>
+                  ))}
+                </Row>
+              ))}
 
               <Row className='mt-1'>
                 <Col sm={12} className='d-flex justify-content-between'>

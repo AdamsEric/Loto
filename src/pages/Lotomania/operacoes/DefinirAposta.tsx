@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Modal, Form, Row, Col } from 'react-bootstrap'
-import { toNumber, isNaN, uniq } from 'lodash'
+import { toNumber, isNaN, uniq, chunk } from 'lodash'
 
 import { Button, InputNumber } from 'src/components/ui'
 
@@ -23,6 +23,9 @@ const DefinirAposta = (props: IDefinirApostaProps) => {
   })
   const [exibir, setExibir] = useState<boolean>(false)
   const [keyFormulario, setKeyFormulario] = useState(1000)
+
+  const matrizIndices = chunk(Array.from({ length: 50 }, (_, index) => index), 6)
+
 
   const limparNumeros = () => {
     setAposta({
@@ -116,91 +119,18 @@ const DefinirAposta = (props: IDefinirApostaProps) => {
               </Col>
             </Row>
 
-            {/* Linha 1 */}
-            <Row>
-              <Col xs={2}>{renderizarCampoNumero(0)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(1)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(2)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(3)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(4)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(5)}</Col>
-            </Row>
-
-            {/* Linha 2 */}
-            <Row>
-              <Col xs={2}>{renderizarCampoNumero(6)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(7)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(8)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(9)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(10)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(11)}</Col>
-            </Row>
-
-            {/* Linha 3 */}
-            <Row>
-              <Col xs={2}>{renderizarCampoNumero(12)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(13)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(14)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(15)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(16)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(17)}</Col>
-            </Row>
-
-            {/* Linha 4 */}
-            <Row>
-              <Col xs={2}>{renderizarCampoNumero(18)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(19)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(20)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(21)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(22)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(23)}</Col>
-            </Row>
-
-            {/* Linha 5 */}
-            <Row>
-              <Col xs={2}>{renderizarCampoNumero(24)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(25)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(26)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(27)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(28)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(29)}</Col>
-            </Row>
-
-            {/* Linha 6 */}
-            <Row>
-              <Col xs={2}>{renderizarCampoNumero(30)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(31)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(32)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(33)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(34)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(35)}</Col>
-            </Row>
-
-            {/* Linha 7 */}
-            <Row>
-              <Col xs={2}>{renderizarCampoNumero(36)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(37)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(38)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(39)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(40)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(41)}</Col>
-            </Row>
-
-            {/* Linha 8 */}
-            <Row>
-              <Col xs={2}>{renderizarCampoNumero(42)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(43)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(44)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(45)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(46)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(47)}</Col>
-            </Row>
-
-            {/* Linha 9 */}
-            <Row>
-              <Col xs={2}>{renderizarCampoNumero(48)}</Col>
-              <Col xs={2}>{renderizarCampoNumero(49)}</Col>
-            </Row>
+            {matrizIndices.map((indices, indexList) => (
+                <Row key={indexList}>
+                  {indices.map(indice => (
+                    <Col
+                      key={indice} 
+                      xs={2}
+                    >
+                      {renderizarCampoNumero(indice)}
+                    </Col>
+                  ))}
+                </Row>
+              ))}
 
             <Row>
               <Col sm={12} className='d-flex justify-content-between'>
